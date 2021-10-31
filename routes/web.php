@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContestEntryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'I am Git master';
+    return view('welcome');
+//   return Cache::get('contest');
+
 });
+
+Route::post('/contest', [ContestEntryController::class, 'store']);
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
